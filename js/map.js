@@ -83,11 +83,11 @@ MapModule.controller('MapCtrl', function ($scope) {
 
 MapModule.controller('EventBoxCtrl', function ($scope) {
     $scope.hoverIn = function() {
-        map[1].setIcon("http://www.googlemapsmarkers.com/v1/A/0099FF/");
+        map[].setIcon("/img/blue_marker.png");
     }
 
     $scope.hoverOut = function() {
-        map[1].setIcon("http://www.googlemapsmarkers.com/v1/A/0099FF/");
+        map[1].setIcon("/img/red_marker.png");
     }
 
 });
