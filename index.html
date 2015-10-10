@@ -142,102 +142,57 @@
         </div>
     </section>
 
-    <section class="no-padding" id="portfolio" ng-controller="EventController as singleEvent">
-        <div class="container-fluid">
-            <div class="row no-gutter">
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="img/portfolio/1.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    {{singleEvent.eventName}}
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="img/portfolio/2.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="img/portfolio/3.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="img/portfolio/4.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="img/portfolio/5.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="img/portfolio/6.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+
+        <section class="no-padding" id="portfolio">
+            <script>
+                var xmlhttp = new XMLHttpRequest();
+                var url = "data.txt";
+
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        var myArr = JSON.parse(xmlhttp.responseText);
+
+                        myFunction(myArr["data"]);
+                    }
+                }
+                xmlhttp.open("GET", url, true);
+                xmlhttp.send();
+
+                generatehtmlF='<div class="container-fluid"> \
+                    <div class="row no-gutter">'
+                tempstr='<div class="col-lg-4 col-sm-6"> <a href="#" class="portfolio-box">\
+                    <img src="img/portfolio/1.jpg" class="img-responsive" alt="">\
+                    <div class="portfolio-box-caption">\
+                    <div class="portfolio-box-caption-content">\
+                    <div class="project-category text-faded">'
+
+
+
+
+                city='Raleigh'
+                function myFunction(arr) {
+                    var out = generatehtmlF;
+                    var i;
+                    var currentstr;
+
+                    for(i = 0; i < Math.min(arr.length,6); i++) {
+                        var cstr=i+1
+                        cstr.toString()
+                        cstr+=".jpg"
+                        console.log(cstr)
+                        currentstr=tempstr.replace(/1.jpg/i, cstr)
+                        console.log(currentstr)
+                        out += currentstr+city+'</div>';
+                        out += '<div class="project-name">'+arr[i]['name']+'</div>';
+                        out +=' </div> </div> </a> </div>'
+                    }
+                    out+='</div></div>'
+                    document.getElementById("portfolio").innerHTML = out;
+                }
+            </script>
+
+        </section>
+
 
     <aside class="bg-dark">
         <div class="container text-center">
