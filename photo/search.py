@@ -12,8 +12,8 @@ def fb_event():
 		for event in r.json()["data"]:
 			#print event["id"]
 			fileW.write(event["id"]+"\n")
-			print event
-	with open("json","w") as outfile:
-		json.dump(r.json(), outfile)
+#			print event
+#	with open("json","w") as outfile:
+#		json.dump(r.json(), outfile)
 fb_event()
 fileW.close()

@@ -32,7 +32,25 @@ var cities = [
     }
 ];
 
+
+function myEvents(arr)
+{
+    var xmlhttp = new XMLHttpRequest();
+    var url = "photo/json";
+
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var myArr = JSON.parse(xmlhttp.responseText);
+
+            return myArr
+        }
+    }
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+}
+
 var map = {};
+
 
 //Angular App Module and Controller
 var MapModule = angular.module('mapsApp', []);
