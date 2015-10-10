@@ -62,7 +62,6 @@ angular.module('mapsApp', [])
             infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
             infoWindow.open($scope.map, marker);
         });
-        
         $scope.markers.push(marker);
         
     }  
@@ -73,7 +72,7 @@ angular.module('mapsApp', [])
 
     $scope.openInfoWindow = function(e, selectedMarker){
         e.preventDefault();
-        google.maps.event.trigger(selectedMarker, 'mouseover');
+        google.maps.event.trigger(selectedMarker, 'click');
     }
 
 });
