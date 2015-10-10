@@ -3,12 +3,14 @@ import requests
 import os, sys
 import urllib
 from PIL import Image
-access_token="CAACEdEose0cBAPqZBJhlt0IW19ZCMaat4ZAlVV8lJa8PbXDmuYZCMWrTUcDhaNK69jcRAU4cqj0L6Wh7DhKZCARqgxHRx1WdPzq4Fq2x3HuK0bXymCJOEQoal0MRK2SuZAEv0Bz2OM7u8NqcKc0kjWwhIioeaxOzl3sNrrY9e5T6r00AKGDbFmqHZBm7qNC89DEf2me7tvf5SBZASw4XIgUO"
+access_token="CAACEdEose0cBAOpLksEZCb2rjbwFB3c2SJHxv6Ugpi3aeRsLV1WGMUfI6mH4aT3si4tniY52YmC9fI5s1cDSkMbpIWxutucb9IWk1Szkpnaefq276X7ZBr6SuR48AeR4wn71ZAd0skRJImf89hRCUCwVsdRZBwZCGrdGdnoiGDh3LWvZBV7P6yTugAUy5Ej9rDKvwemTcxZBh2DJNZCZBVvz5"
 fileR=open("event-id","r")
 fileW=open("json", "w")
 def get_cover():
 	count = 0
 	for line in fileR:
+		if(count>=6):
+			break
 		url = "https://graph.facebook.com/v2.5/"+line+"?fields=cover&access_token="+access_token
 		r = requests.get(url)
 		if r.status_code == 200:
