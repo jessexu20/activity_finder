@@ -17,4 +17,55 @@ h2 {
 	margin-top:50px;
 	margin-left:10px;
 	margin-right:10px;
+/*	color :black;*/
+}
+.mapbar-default {
+    border-color: rgba(34,34,34,.05);
+    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+    background-color: #fff;
+    -webkit-transition: all .35s;
+    -moz-transition: all .35s;
+    transition: all .35s;
+}
+
+.mapbar-default .navbar-header .navbar-brand {
+    text-transform: uppercase;
+    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+    font-weight: 700;
+    color: #f05f40;
+}
+
+.mapbar-default .navbar-header .navbar-brand:hover,
+.mapbar-default .navbar-header .navbar-brand:focus {
+    color: #eb3812;
+}
+
+.mapbar-default .nav > li>a,
+.mapbar-default .nav>li>a:focus {
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
+    color: #222;
+}
+
+.mapbar-default .nav > li>a:hover,
+.mapbar-default .nav>li>a:focus:hover {
+    color: #f05f40;
+}
+
+.mapbar-default .nav > li.active>a,
+.mapbar-default .nav>li.active>a:focus {
+    color: #f05f40!important;
+    background-color: white;
+}
+
+	.mapbar-default.affix .navbar-header .navbar-brand {
+        font-size: 14px;
+        color: #f05f40;
+    }
+    .mapbar-default.affix .navbar-header .navbar-brand:hover,
+    .mapbar-default.affix .navbar-header .navbar-brand:focus {
+        color: #eb3812;
+    }
+
 }
