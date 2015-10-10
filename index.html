@@ -24,8 +24,8 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/creative.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
         <!-- Event Detail -->
     <script src="js/events.js"></script>
 
@@ -178,6 +178,7 @@
                     for(i = 0; i < Math.min(arr.length,6); i++) {
                         var cstr=i
                         cstr.toString()
+                        cstr+=".jpg"
                         console.log(cstr)
                         currentstr=tempstr.replace(/1.jpg/i, cstr)
                         console.log(currentstr)
@@ -186,7 +187,7 @@
                         out +=' </div> </div> </a> </div>'
                     }
                     out+='</div></div>'
-                    document.getElementById("portfolio").innerHTML = out;
+                    $("#portfolio").html(out)
                 }
             </script>
 
