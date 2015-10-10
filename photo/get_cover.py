@@ -1,8 +1,9 @@
 import json
 import requests
-import os
+import os, sys
 import urllib
-access_token="CAACEdEose0cBAN2cZBDuWn7mOOUZCG2WuQbcO7peFZBQP0MFr3WkZCBBQqt6dDko4pWsXHm1whImBz2FkiZCBZCpd8mBPGgh2HSVGZCGX6wW2rZAL63I90HF4CsZASVk4PQM5qkPTla2xxJuZAYXXdRfOw7wFUjpyLOOZCBapGhsMzKPUNkgCJPhSZBmDPL3fZASf0S4SJHsVcaWZA73fTsfIlsy2r"
+from PIL import Image
+access_token="CAACEdEose0cBAPqZBJhlt0IW19ZCMaat4ZAlVV8lJa8PbXDmuYZCMWrTUcDhaNK69jcRAU4cqj0L6Wh7DhKZCARqgxHRx1WdPzq4Fq2x3HuK0bXymCJOEQoal0MRK2SuZAEv0Bz2OM7u8NqcKc0kjWwhIioeaxOzl3sNrrY9e5T6r00AKGDbFmqHZBm7qNC89DEf2me7tvf5SBZASw4XIgUO"
 fileR=open("event-id","r")
 fileW=open("json", "w")
 def get_cover():
@@ -25,6 +26,9 @@ def get_cover():
 def download_cover(url,name):
 	image=urllib.URLopener()
 	image.retrieve(url,"cover/"+name)
+	im = Image.open("cover/"+name)
+	im_resize = im.resize((650, 350), Image.ANTIALIAS)
+	im_resize.save("cover/"+name)
 get_cover()
 fileR.close()
 fileW.close()
