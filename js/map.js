@@ -42,7 +42,7 @@ function myEvents(arr)
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var myArr = JSON.parse(xmlhttp.responseText);
 
-            return myArr
+            return myArr["data"]
         }
     }
     xmlhttp.open("GET", url, true);

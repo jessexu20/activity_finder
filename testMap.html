@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="id01"></div>
+
+<script>
+    var xmlhttp = new XMLHttpRequest();
+    var url = "data.txt";
+
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var myArr = JSON.parse(xmlhttp.responseText);
+
+            myFunction(myArr["data"]);
+        }
+    }
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+
+
+    function myFunction(arr) {
+        var out = "";
+        var i;
+        for(i = 0; i < arr.length; i++) {
+            out +='<div>'+arr[i]["start_time"]+'</div>'
+            out += '<p>'+arr[i]['id'] + '</p>';
+            out += '<p>'+arr[i]['name'] + '</p>';
+            out +='<div>'+arr[i]["description"]+'</div>'
+            if(arr[i].hasOwnProperty("location"))
+                out+='<p>true</p>'
+        }
+        document.getElementById("id01").innerHTML = out;
+    }
+</script>
+
+</body>
+</html>
