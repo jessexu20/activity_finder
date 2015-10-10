@@ -67,11 +67,11 @@
         <!-- /.container-fluid -->
     </nav>
 	<div class="row">
-		<div class="col-md-7">
+		<div class="col-md-7" ng-controller="EventBoxCtrl">
 				<!-- 3 per ro-->
 				<div>
 	            <div class="col-md-4 portfolio-item">
-					<div class="service-box">
+					<div class="service-box" ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">
 	                <a href="#">
 	                    <img class="img-responsive" src="http://placehold.it/300x200" alt="">
 	                </a>
