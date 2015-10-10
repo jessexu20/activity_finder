@@ -32,9 +32,12 @@ var cities = [
     }
 ];
 
+var map = {};
+
 //Angular App Module and Controller
-angular.module('mapsApp', [])
-.controller('MapCtrl', function ($scope) {
+var MapModule = angular.module('mapsApp', []);
+
+MapModule.controller('MapCtrl', function ($scope) {
 
     var mapOptions = {
         zoom: 4,
@@ -64,16 +67,28 @@ angular.module('mapsApp', [])
         });
         
         $scope.markers.push(marker);
+        return marker;
         
     }  
     
     for (i = 0; i < cities.length; i++){
-        createMarker(cities[i]);
+        map[i] = createMarker(cities[i]);
     }
 
     $scope.openInfoWindow = function(e, selectedMarker){
         e.preventDefault();
         google.maps.event.trigger(selectedMarker, 'mouseover');
+    }
+
+});
+
+MapModule.controller('EventBoxCtrl', function ($scope) {
+    $scope.hoverIn = function() {
+        map[1].setIcon("http://www.googlemapsmarkers.com/v1/A/0099FF/");
+    }
+
+    $scope.hoverOut = function() {
+        map[1].setIcon("http://www.googlemapsmarkers.com/v1/A/0099FF/");
     }
 
 });
