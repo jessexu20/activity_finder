@@ -1,32 +1,32 @@
 //Data
-var cities = [
+var events = [
     {
-        city : 'Toronto',
-        desc : 'This is the best city in the world!',
+        event : 'Toronto',
+        desc : 'This is the best event in the world!',
         lat : 43.7000,
         long : -79.4000
     },
     {
-        city : 'New York',
-        desc : 'This city is aiiiiite!',
+        event : 'New York',
+        desc : 'This event is aiiiiite!',
         lat : 40.6700,
         long : -73.9400
     },
     {
-        city : 'Chicago',
-        desc : 'This is the second best city in the world!',
+        event : 'Chicago',
+        desc : 'This is the second best event in the world!',
         lat : 41.8819,
         long : -87.6278
     },
     {
-        city : 'Los Angeles',
-        desc : 'This city is live!',
+        event : 'Los Angeles',
+        desc : 'This event is live!',
         lat : 34.0500,
         long : -118.2500
     },
     {
-        city : 'Las Vegas',
-        desc : 'Sin City...\'nuff said!',
+        event : 'Las Vegas',
+        desc : 'Sin event...\'nuff said!',
         lat : 36.0800,
         long : -115.1522
     }
@@ -50,10 +50,25 @@ function myEvents(arr)
 }
 
 var map = {};
+var redDot = new google.maps.MarkerImage(
+    "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|C92A2A",
+    null, /* size is determined at runtime */
+    null, /* origin is 0,0 */
+    null, /* anchor is bottom center of the scaled image */
+    new google.maps.Size(20, 34)
+);
+var blueDot = new google.maps.MarkerImage(
+    "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|2F4AC9",
+    null, /* size is determined at runtime */
+    null, /* origin is 0,0 */
+    null, /* anchor is bottom center of the scaled image */
+    new google.maps.Size(20, 34)
+); 
 
 
 //Angular App Module and Controller
 var MapModule = angular.module('mapsApp', []);
+
 
 MapModule.controller('MapCtrl', function ($scope) {
 
@@ -71,11 +86,13 @@ MapModule.controller('MapCtrl', function ($scope) {
     var infoWindow = new google.maps.InfoWindow();
     
     var createMarker = function (info){
-        
+ 
+        // var image='img/red_marker.png'
         var marker = new google.maps.Marker({
             map: $scope.map,
             position: new google.maps.LatLng(info.lat, info.long),
-            title: info.city
+            title: info.event,
+			icon: redDot
         });
         marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
         
@@ -88,8 +105,8 @@ MapModule.controller('MapCtrl', function ($scope) {
         
     }  
     
-    for (i = 0; i < cities.length; i++){
-        map[i] = createMarker(cities[i]);
+    for (i = 0; i < events.length; i++){
+        map[i] = createMarker(events[i]);
     }
 
     $scope.openInfoWindow = function(e, selectedMarker){
@@ -101,11 +118,11 @@ MapModule.controller('MapCtrl', function ($scope) {
 
 MapModule.controller('EventBoxCtrl', function ($scope) {
     $scope.hoverIn = function() {
-        map[1].setIcon("http://www.googlemapsmarkers.com/v1/A/0099FF/");
+        map[1].setIcon(blueDot);
     }
 
     $scope.hoverOut = function() {
-        map[1].setIcon("http://www.googlemapsmarkers.com/v1/A/0099FF/");
+        map[1].setIcon(redDot);
     }
 
 });
