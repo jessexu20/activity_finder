@@ -3,7 +3,7 @@ import requests
 import os, sys
 import urllib
 from PIL import Image
-access_token="CAACEdEose0cBAA6w3tRDSWsr4Vd0VrZBu83niDh2ctsVfZAsT3xj3E5q2hQB73UtxyRgMoiSl75PnB7JVD9LF5VgyVRCPdOhYztAyvFWvkCUDkJBMshgnFdWJwWzK48bl1BswpbVnznau5Ta2hLegqRRAZBalUYEcipCTAjw3rJD3JXn6lfGOUMqEuOHVFmIvQBQe8LfZCc3qiVXrqEw"
+access_token="CAACEdEose0cBAB1etwhIVYGWdU8acW7oysXfA273b2hKpvZCnttDklhFy30kZBxSchF1HiAXmunj1SLmMqKY0QE8THLCDcBi3vaEIuJDOi21xjWZBPRHbSQlcjxTS0Vut560kSudY6TMZA3jXIQct1q6WZCbNqI8qBgvwxTSTZB8ZBdbxLiB6FObO8joJ0ZCiiyZC5YeoOHkSv5VNMKw12Rfg"
 fileR=open("event-id","r")
 fileW=open("json", "w")
 def get_cover():
@@ -18,9 +18,10 @@ def get_cover():
     #     "city":"",
     #     }
     # }
+    fileW.write("{\"data\": [")
     count = 0
     for line in fileR:
-        if count > 1:
+        if count > 6:
             break;
         url = "https://graph.facebook.com/v2.5/"+line+"?fields=cover&access_token="+access_token#has cover
         r = requests.get(url)
@@ -45,11 +46,16 @@ def get_cover():
                             param['description']=eventjson['description']
                             param['start_time']=eventjson['start_time']
                             param['end_time']=eventjson['end_time']
-                            param['longtitude']=placejson['location']['longitude']
+                            param['longitude']=placejson['location']['longitude']
                             param['latitude']=placejson['location']['latitude']
                             param['city']=placejson['location']['city']
                             # print param
+                            if(count>1):
+                                fileW.write(',')
                             json.dump(param, fileW,sort_keys=True);
+                            
+    fileW.write("]}")
+                            
 def download_cover(url,name):
 	image=urllib.URLopener()
 	image.retrieve(url,"cover/"+name)
@@ -59,7 +65,7 @@ def download_cover(url,name):
 get_cover()
 fileR.close()
 fileW.close()
-with open('json') as data_file:    
-    data = json.load(data_file)
-
-print(data)
+# with open('json') as data_file:
+#     data = json.load(data_file)
+#
+# print(data)
