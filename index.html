@@ -24,7 +24,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/creative.css" type="text/css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
         <!-- Event Detail -->
     <script src="js/events.js"></script>
@@ -50,20 +50,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Start Bootstrap</a>
+                <a class="navbar-brand page-scroll" href="#page-top">Event Hunter</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
+                    <!--li>
                         <a class="page-scroll" href="#about">About</a>
+                    </li-->
+                    <li>
+                        <a class="page-scroll" href="#services">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#services">Services</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#portfolio">Portfolio</a>
+                        <a class="page-scroll" href="#portfolio">Highlights</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
@@ -78,15 +78,15 @@
     <header>
         <div class="header-content">
             <div class="header-content-inner">
-                <h1>Your Favorite Source of Free Bootstrap Themes</h1>
+                <h1><br><br>Everyday is Friday</h1>
                 <hr>
-                <p>Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!</p>
-                <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
+                <p><b><br>Get lastest news of all student events around RTP area.</b></p>
+                <a href="#services" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
             </div>
         </div>
     </header>
 
-    <section class="bg-primary" id="about">
+    <!--section class="bg-primary" id="about">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
@@ -97,8 +97,7 @@
                 </div>
             </div>
         </div>
-    </section>
-
+    </section-->
     <section id="services">
         <div class="container">
             <div class="row">
@@ -152,7 +151,7 @@
                     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                         var myArr = JSON.parse(xmlhttp.responseText);
 
-                        myFunction(myArr["data"]);
+                        myFunction(myArr);
                     }
                 }
                 xmlhttp.open("GET", url, true);
@@ -162,7 +161,7 @@
                     <div class="row no-gutter">'
                 tempstr='<div class="col-lg-4 col-sm-6"> <a href="#" class="portfolio-box">\
                     <img src="photo/cover/1.jpg" class="img-responsive" alt="">\
-                    <div class="portfolio-bx-caption">\
+                    <div class="portfolio-box-caption">\
                     <div class="portfolio-box-caption-content">\
                     <div class="project-category text-faded">'
 
@@ -179,17 +178,18 @@
                         var cstr=i
                         cstr.toString()
                         cstr+=".jpg"
-
+                        console.log(cstr)
                         currentstr=tempstr.replace(/1.jpg/i, cstr)
-
-                        out += currentstr+city+'</div>'
-                        out += '<div class="project-name">'+arr[i]['name']+'</div>'
+                        console.log(currentstr)
+                        out += currentstr+city+'</div>';
+                        out += '<div class="project-name">'+arr[i]['name']+'</div>';
                         out +=' </div> </div> </a> </div>'
                     }
                     out+='</div></div>'
-                    $("#portfolio").html(out)
+                    document.getElementById("portfolio").innerHTML = out;
                 }
             </script>
+
 
         </section>
 
@@ -197,8 +197,8 @@
     <aside class="bg-dark">
         <div class="container text-center">
             <div class="call-to-action">
-                <h2>Free Download at Start Bootstrap!</h2>
-                <a href="#" class="btn btn-default btn-xl wow tada">Download Now!</a>
+                <h2>Want to know more ?</h2>
+                <a href="map.html" class="btn btn-default btn-xl wow tada">Explore !</a>
             </div>
         </div>
     </aside>
@@ -207,17 +207,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">Let's Get In Touch!</h2>
+                    <h2 class="section-heading">Meet our team!</h2>
                     <hr class="primary">
-                    <p>Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                    <p>Go Wolf Pack</p>
                 </div>
                 <div class="col-lg-4 col-lg-offset-2 text-center">
-                    <i class="fa fa-phone fa-3x wow bounceIn"></i>
-                    <p>123-456-6789</p>
+                    <i class="fa fa-envelope-o fa-3x wow bounceIn"></i>
+                    <p><b><br>Stubborn Summer</b></p>
+                    <p><a href="mailto:girasoleyang@gmail.com">Girasoleyang@gmail.com</a></p>
                 </div>
                 <div class="col-lg-4 text-center">
                     <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                    <p><a href="mailto:your-email@your-domain.com">feedback@startbootstrap.com</a></p>
+                    <p><b><br>Stupid Jesse</b></p>
+                    <p><a href="mailto:Jesse.xu.20@gmail.com">Jesse.xu.20@gmail.com</a></p>
                 </div>
             </div>
         </div>

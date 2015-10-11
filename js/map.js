@@ -117,12 +117,13 @@ MapModule.controller('MapCtrl', function ($scope) {
 });
 
 MapModule.controller('EventBoxCtrl', function ($scope) {
-    $scope.hoverIn = function() {
-        map[1].setIcon(blueDot);
+    $scope.hoverIn = function(id) {
+		console.log(id)
+        map[id].setIcon(blueDot);
     }
 
-    $scope.hoverOut = function() {
-        map[1].setIcon(redDot);
+    $scope.hoverOut = function(id) {
+        map[id].setIcon(redDot);
     }
 
 });
