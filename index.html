@@ -161,7 +161,7 @@
                 generatehtmlF='<div class="container-fluid"> \
                     <div class="row no-gutter">'
                 tempstr='<div class="col-lg-4 col-sm-6"> <a href="#" class="portfolio-box">\
-                    <img data-caman="love() hazyDays()" src="photo/cover/1.jpg" class="img-responsive" alt="">\
+                    <a href="url"><img data-caman="love() hazyDays()" src="photo/cover/1.jpg" class="img-responsive" alt=""></a>\
                     <div class="portfolio-box-caption">\
                     <div class="portfolio-box-caption-content">\
                     <div class="project-category text-faded">'
@@ -181,6 +181,7 @@
                         cstr+=".jpg"
                         console.log(cstr)
                         currentstr=tempstr.replace(/1.jpg/i, cstr)
+			currentstr=currentstr.replace(/url/i, arr[i]["url"])
                         console.log(currentstr)
                         out += currentstr+city+'</div>';
                         out += '<div class="project-name">'+arr[i]['name']+'</div>';
