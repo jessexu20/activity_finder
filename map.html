@@ -67,80 +67,34 @@
         <!-- /.container-fluid -->
     </nav>
 	<div class="row">
-		<div class="col-md-7" ng-controller="EventBoxCtrl">
+		<div class="col-md-7" ng-controller="EventBoxCtrl" id="rowEvents">
 				<!-- 3 per ro-->
 				<script>
-	                var xmlhttp = new XMLHttpRequest();
-	                var url = "photo/json";
-	                xmlhttp.onreadystatechange = function() {
-	                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-	                        var myArr = JSON.parse(xmlhttp.responseText);
-	                        myFunction(myArr["data"]);
-	                    }
-	                }
-	                xmlhttp.open("GET", url, true);
-	                xmlhttp.send();
-	                generatehtmlF='<div class="container-fluid"> \
-	                    <div class="row no-gutter">'
-	                tempstr='<div class="col-lg-4 col-sm-6"> <a href="#" class="portfolio-box">\
-	                    <img src="photo/cover/1.jpg" class="img-responsive" alt="">\
-	                    <div class="portfolio-bx-caption">\
-	                    <div class="portfolio-box-caption-content">\
-	                    <div class="project-category text-faded">'
-	                city='Raleigh'
-	                function myFunction(arr) {
-	                    var out = generatehtmlF;
-	                    var i;
-	                    var currentstr;
-	                    for(i = 0; i < Math.min(arr.length,6); i++) {
-	                        var cstr=i
-	                        cstr.toString()
-	                        cstr+=".jpg"
-	                        currentstr=tempstr.replace(/1.jpg/i, cstr)
-	                        out += currentstr+city+'</div>'
-	                        out += '<div class="project-name">'+arr[i]['name']+'</div>'
-	                        out +=' </div> </div> </a> </div>'
-	                    }
-	                    out+='</div></div>'
-	                    $("#portfolio").html(out)
-	                }
+                    var events = myEvents()
+                    var mystr='<div class="col-md-4 portfolio-item">\
+                            <div class="service-box" ng-mouseover="hoverIn(numberid)" ng-mouseleave="hoverOut(numberid)">\
+                            <a href="#">\
+                            <img class="img-responsive" src="http://placehold.it/300x200" alt="">\
+                            </a>\
+                            <h3>\
+                            projectname\
+                             </h3>\
+                            <p class="text-muted">description</p>\
+                           </div>\
+                           </div>'
+                    var j;
+                    var currentstr
+                    for(j = 0; j < Math.min(events.length,9); j++) {
+                        currentstr=mystr
+                        var tempstr=j;
+                        tempstr.toString()
+                        currentstr=currentstr.replace(/numberid/i,tempstr)
+                        currentstr=currentstr.replace(/projectname/i, events[j]["name"])
+                        currentstr=currentstr.replace(/description/i,events[j]["description"])
+                    }
+                    document.getElementById("rowEvents").innerHTML = currentstr;
 	            </script>
-				<div>
-					<div class="col-md-4 portfolio-item">
-						<div class="service-box" ng-mouseover="hoverIn(3)" ng-mouseleave="hoverOut(3)">
-					    <a href="#">
-					        <img class="img-responsive" src="http://placehold.it/300x200" alt="">
-					    </a>
-					    <h3>
-					        Project Name
-					    </h3>
-					    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-					 	</div>
-					</div>
-					<div class="col-md-4 portfolio-item">
-						<div class="service-box" id="b" ng-mouseover="hoverIn(4)" ng-mouseleave="hoverOut(4)">
-					    <a href="#">
-					        <img class="img-responsive" src="http://placehold.it/300x200" alt="">
-					    </a>
-					    <h3>
-					        Project Name
-					    </h3>
-					    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-					 	</div>
-					</div>
-					<div class="col-md-4 portfolio-item">
-						<div class="service-box">
-					    <a href="#">
-					        <img class="img-responsive" src="http://placehold.it/300x200" alt="">
-					    </a>
-					    <h3>
-					        Project Name
-					    </h3>
-					    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-					 	</div>
-					</div>
-				</div>
-			</div>
+
                 <div class="col-md-4">
  					<div id="map" ng-controller="MapCtrl">
                 </div>

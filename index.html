@@ -152,7 +152,7 @@
                     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                         var myArr = JSON.parse(xmlhttp.responseText);
 
-                        myFunction(myArr);
+                        myFunction(myArr["data"]);
                     }
                 }
                 xmlhttp.open("GET", url, true);
@@ -174,7 +174,7 @@
                     var out = generatehtmlF;
                     var i;
                     var currentstr;
-
+                    console.log(arr.length)
                     for(i = 0; i < Math.min(arr.length,6); i++) {
                         var cstr=i
                         cstr.toString()

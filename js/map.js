@@ -1,39 +1,7 @@
 //Data
-var events = [
-    {
-        event : 'Toronto',
-        desc : 'This is the best event in the world!',
-        lat : 43.7000,
-        long : -79.4000
-    },
-    {
-        event : 'New York',
-        desc : 'This event is aiiiiite!',
-        lat : 40.6700,
-        long : -73.9400
-    },
-    {
-        event : 'Chicago',
-        desc : 'This is the second best event in the world!',
-        lat : 41.8819,
-        long : -87.6278
-    },
-    {
-        event : 'Los Angeles',
-        desc : 'This event is live!',
-        lat : 34.0500,
-        long : -118.2500
-    },
-    {
-        event : 'Las Vegas',
-        desc : 'Sin event...\'nuff said!',
-        lat : 36.0800,
-        long : -115.1522
-    }
-];
 
 
-function myEvents(arr)
+function myEvents()
 {
     var xmlhttp = new XMLHttpRequest();
     var url = "photo/json";
@@ -41,7 +9,6 @@ function myEvents(arr)
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var myArr = JSON.parse(xmlhttp.responseText);
-
             return myArr["data"]
         }
     }
@@ -71,7 +38,8 @@ var MapModule = angular.module('mapsApp', []);
 
 
 MapModule.controller('MapCtrl', function ($scope) {
-
+    var events = myEvents()
+    console(events.length)
     var mapOptions = {
         zoom: 4,
         center: new google.maps.LatLng(40.0000, -98.0000),
@@ -90,11 +58,11 @@ MapModule.controller('MapCtrl', function ($scope) {
         // var image='img/red_marker.png'
         var marker = new google.maps.Marker({
             map: $scope.map,
-            position: new google.maps.LatLng(info.lat, info.long),
-            title: info.event,
+            position: new google.maps.LatLng(info["latitude"], info["longitude"]),
+            title: info["name"],
 			icon: redDot
         });
-        marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
+        marker.content = '<div class="infoWindowContent">' + info["description"] + '</div>';
         
         google.maps.event.addListener(marker, 'click', function(){
             infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
@@ -104,7 +72,7 @@ MapModule.controller('MapCtrl', function ($scope) {
         return marker;
         
     }  
-    
+
     for (i = 0; i < events.length; i++){
         map[i] = createMarker(events[i]);
     }
