@@ -24,7 +24,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/creative.css" type="text/css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
         <!-- Event Detail -->
     <script src="js/events.js"></script>
@@ -146,7 +146,7 @@
         <section class="no-padding" id="portfolio">
             <script>
                 var xmlhttp = new XMLHttpRequest();
-                var url = "photo/json";
+                var url = "data/testdata.txt";
 
                 xmlhttp.onreadystatechange = function() {
                     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -162,7 +162,7 @@
                     <div class="row no-gutter">'
                 tempstr='<div class="col-lg-4 col-sm-6"> <a href="#" class="portfolio-box">\
                     <img src="photo/cover/1.jpg" class="img-responsive" alt="">\
-                    <div class="portfolio-bx-caption">\
+                    <div class="portfolio-box-caption">\
                     <div class="portfolio-box-caption-content">\
                     <div class="project-category text-faded">'
 
@@ -179,17 +179,18 @@
                         var cstr=i
                         cstr.toString()
                         cstr+=".jpg"
-
+                        console.log(cstr)
                         currentstr=tempstr.replace(/1.jpg/i, cstr)
-
-                        out += currentstr+city+'</div>'
-                        out += '<div class="project-name">'+arr[i]['name']+'</div>'
+                        console.log(currentstr)
+                        out += currentstr+city+'</div>';
+                        out += '<div class="project-name">'+arr[i]['name']+'</div>';
                         out +=' </div> </div> </a> </div>'
                     }
                     out+='</div></div>'
-                    $("#portfolio").html(out)
+                    document.getElementById("portfolio").innerHTML = out;
                 }
             </script>
+
 
         </section>
 

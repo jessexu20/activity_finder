@@ -1,35 +1,75 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <style>
+        pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
+        .string { color: green; }
+        .number { color: darkorange; }
+        .boolean { color: blue; }
+        .null { color: magenta; }
+        .key { color: red; }
+    </style>
+</head>
 <body>
 
 <div id="id01"></div>
 
 <script>
     var xmlhttp = new XMLHttpRequest();
-    var url = "data.txt";
+    var url = "data/testdata.txt";
 
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var myArr = JSON.parse(xmlhttp.responseText);
+            var myObject = JSON.stringify(myArr);
 
-            myFunction(myArr["data"]);
+
+            document.getElementById("id01").innerHTML = myObject ;
+            //myFunction(myArr["data"]);
         }
     }
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
 
+    function syntaxHighlight(json) {
+        if (typeof json != 'string') {
+            json = JSON.stringify(json, undefined, 2);
+        }
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'key';
+                } else {
+                    cls = 'string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
+
+    }
 
     function myFunction(arr) {
         var out = "";
         var i;
         for(i = 0; i < arr.length; i++) {
-            out +='<div>'+arr[i]["start_time"]+'</div>'
-            out += '<p>'+arr[i]['id'] + '</p>';
-            out += '<p>'+arr[i]['name'] + '</p>';
-            out +='<div>'+arr[i]["description"]+'</div>'
-            out +='<div>'+arr[i]["location"]+'</div>'
-            if(arr[i].hasOwnProperty("location"))
-                out+='<p>true</p>'
+            out += '<div>' + arr[i]["start_time"] + '</div>'
+            out += '<p>' + arr[i]['id'] + '</p>';
+            out += '<p>' + arr[i]['name'] + '</p>';
+            out += '<div>' + arr[i]["description"] + '</div>'
+            if(attr[i].hasA)
+            out += '<div>' + arr[i]["location"] + '</div>'
+            //out += '<div>' + arr[i]["location"]'</div>'
+            out +='<p> -------------  </p>'
+
+            //out += '<div>' + arr[i]["location"]["longitude"] + '</div>'
+            //out += '<div>' + arr[i]["location"]["latitude"] + '</div>'
+
         }
         document.getElementById("id01").innerHTML = out;
     }
