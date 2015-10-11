@@ -49,6 +49,7 @@ def get_cover():
                             param['longitude']=placejson['location']['longitude']
                             param['latitude']=placejson['location']['latitude']
                             param['city']=placejson['location']['city']
+                            param['url']="https://www.facebook.com/events/"+line[:len(line)-1];
                             # print param
                             if(count>1):
                                 fileW.write(',')
