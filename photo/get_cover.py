@@ -20,7 +20,7 @@ def get_cover():
     # }
     count = 0
     for line in fileR:
-        if count > 6:
+        if count > 1:
             break;
         url = "https://graph.facebook.com/v2.5/"+line+"?fields=cover&access_token="+access_token#has cover
         r = requests.get(url)
@@ -59,3 +59,7 @@ def download_cover(url,name):
 get_cover()
 fileR.close()
 fileW.close()
+with open('json') as data_file:    
+    data = json.load(data_file)
+
+print(data)

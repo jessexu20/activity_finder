@@ -146,13 +146,13 @@
         <section class="no-padding" id="portfolio">
             <script>
                 var xmlhttp = new XMLHttpRequest();
-                var url = "data/testdata.txt";
+                var url = "photo/json";
 
                 xmlhttp.onreadystatechange = function() {
                     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                         var myArr = JSON.parse(xmlhttp.responseText);
 
-                        myFunction(myArr["data"]);
+                        myFunction(myArr);
                     }
                 }
                 xmlhttp.open("GET", url, true);
