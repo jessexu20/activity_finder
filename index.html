@@ -24,6 +24,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/creative.css" type="text/css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/camanjs/4.1.2/caman.full.min.js"></script>
 
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
         <!-- Event Detail -->
@@ -161,8 +162,8 @@
 
                 generatehtmlF='<div class="container-fluid"> \
                     <div class="row no-gutter">'
-                tempstr='<div class="col-lg-4 col-sm-6"> <a href="#" class="portfolio-box">\
-                    <img src="photo/cover/1.jpg" class="img-responsive" alt="">\
+                tempstr='<div class="col-lg-4 col-sm-6"> <a href="url" class="portfolio-box">\
+                    <img data-caman="love() hazyDays()" src="photo/cover/1.jpg" class="img-responsive" alt="">\
                     <div class="portfolio-box-caption">\
                     <div class="portfolio-box-caption-content">\
                     <div class="project-category text-faded">'
@@ -182,6 +183,7 @@
                         cstr+=".jpg"
                         console.log(cstr)
                         currentstr=tempstr.replace(/1.jpg/i, cstr)
+						currentstr=currentstr.replace(/url/i, arr[i]["url"])
                         console.log(currentstr)
                         out += currentstr+city+'</div>';
                         out += '<div class="project-name">'+arr[i]['name']+'</div>';
