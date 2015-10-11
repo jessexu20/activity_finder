@@ -63,38 +63,10 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-	<div class="row">
-		<div class="col-md-7" ng-controller="EventBoxCtrl" id="rowEvents">
-				<!-- 3 per ro-->
-				<script>
-                    var events = myEvents()
-                    var mystr='<div class="col-md-4 portfolio-item">\
-                            <div class="service-box" ng-mouseover="hoverIn(numberid)" ng-mouseleave="hoverOut(numberid)">\
-                            <a href="#">\
-                            <img class="img-responsive" src="http://placehold.it/300x200" alt="">\
-                            </a>\
-                            <h3>\
-                            projectname\
-                             </h3>\
-                            <p class="text-muted">description</p>\
-                           </div>\
-                           </div>'
-                    var j;
-                    var currentstr
-                    for(j = 0; j < Math.min(events.length,9); j++) {
-                        currentstr=mystr
-                        var tempstr=j;
-                        tempstr.toString()
-                        currentstr=currentstr.replace(/numberid/i,tempstr)
-                        currentstr=currentstr.replace(/projectname/i, events[j]["name"])
-                        currentstr=currentstr.replace(/description/i,events[j]["description"])
-                    }
-                    document.getElementById("rowEvents").innerHTML = currentstr;
-	            </script>
+	<div class="row" id="rowevents">
 
-                <div class="col-md-4">
- 					<div id="map" ng-controller="MapCtrl">
-                </div>
+
+
 	</div>
 
     <!-- jQuery -->
@@ -113,10 +85,10 @@
 	
     <script src="http://maps.googleapis.com/maps/api/js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-    
+
     <!-- Event Detail -->
     <script src="js/map.js"></script>
-
+    <script src="js/globalvariable.js"></script>
 </body>
 
 </html>
