@@ -1,5 +1,25 @@
 //Data
-var events = [
+function myEvents(arr)
+{
+    var xmlhttp = new XMLHttpRequest();
+    var url = "photo/json";
+
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var myArr = JSON.parse(xmlhttp.responseText);
+
+            return myArr
+        }
+    }
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+}
+
+
+//Angular App Module and Controller
+var MapModule = angular.module('mapsApp', [])
+.controller('EventBoxCtrl', function ($scope) {
+	$scope.events = [
     {
         event : 'Toronto',
         desc : 'This is the best event in the world!',
@@ -32,23 +52,6 @@ var events = [
     }
 ];
 
-
-function myEvents(arr)
-{
-    var xmlhttp = new XMLHttpRequest();
-    var url = "photo/json";
-
-    xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            var myArr = JSON.parse(xmlhttp.responseText);
-
-            return myArr
-        }
-    }
-    xmlhttp.open("GET", url, true);
-    xmlhttp.send();
-}
-
 var map = {};
 var redDot = new google.maps.MarkerImage(
     "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|C92A2A",
@@ -66,63 +69,55 @@ var blueDot = new google.maps.MarkerImage(
 ); 
 
 
-//Angular App Module and Controller
-var MapModule = angular.module('mapsApp', []);
+var mapOptions = {
+    zoom: 4,
+    center: new google.maps.LatLng(40.0000, -98.0000),
+    // mapTypeId: google.maps.MapTypeId.TERRAIN
+	
+}
 
+$scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-MapModule.controller('MapCtrl', function ($scope) {
+$scope.markers = [];
 
-    var mapOptions = {
-        zoom: 4,
-        center: new google.maps.LatLng(40.0000, -98.0000),
-        // mapTypeId: google.maps.MapTypeId.TERRAIN
-		
-    }
+var infoWindow = new google.maps.InfoWindow();
 
-    $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+var createMarker = function (info){
 
-    $scope.markers = [];
+    // var image='img/red_marker.png'
+    var marker = new google.maps.Marker({
+        map: $scope.map,
+        position: new google.maps.LatLng(info.lat, info.long),
+        title: info.event,
+		icon: redDot
+    });
+    marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
     
-    var infoWindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(marker, 'click', function(){
+        infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+        infoWindow.open($scope.map, marker);
+    });
+    $scope.markers.push(marker);
+    return marker;
     
-    var createMarker = function (info){
- 
-        // var image='img/red_marker.png'
-        var marker = new google.maps.Marker({
-            map: $scope.map,
-            position: new google.maps.LatLng(info.lat, info.long),
-            title: info.event,
-			icon: redDot
-        });
-        marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
-        
-        google.maps.event.addListener(marker, 'click', function(){
-            infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
-            infoWindow.open($scope.map, marker);
-        });
-        $scope.markers.push(marker);
-        return marker;
-        
-    }  
-    
-    for (i = 0; i < events.length; i++){
-        map[i] = createMarker(events[i]);
+}  
+
+for (i = 0; i < $scope.events.length; i++){
+    map[i] = createMarker($scope.events[i]);
+	$scope.events[i].map_id = i;
+}
+
+$scope.openInfoWindow = function(e, selectedMarker){
+    e.preventDefault();
+    google.maps.event.trigger(selectedMarker, 'click');
+}
+
+    $scope.hoverIn = function(map_id) {
+        map[map_id].setIcon(blueDot);
     }
 
-    $scope.openInfoWindow = function(e, selectedMarker){
-        e.preventDefault();
-        google.maps.event.trigger(selectedMarker, 'click');
-    }
-
-});
-
-MapModule.controller('EventBoxCtrl', function ($scope) {
-    $scope.hoverIn = function() {
-        map[1].setIcon(blueDot);
-    }
-
-    $scope.hoverOut = function() {
-        map[1].setIcon(redDot);
+    $scope.hoverOut = function(map_id) {
+        map[map_id].setIcon(redDot);
     }
 
 });
