@@ -36,5 +36,10 @@ def events_handler():
             return json.dumps(data,indent=4, separators=(',', ': ')),200
     except Exception , e:
         print e
+@app.route('/shutdown')
+def server_shutdown():
+    shutdown= request.environ.get('werkzeug.server.shutdown')
+    shutdown()
+    return "Server shutting down"
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=int(os.environ.get("PORT",80)))
