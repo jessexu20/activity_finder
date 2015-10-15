@@ -1,56 +1,40 @@
-//Data
-function myEvents(arr)
-{
-    var xmlhttp = new XMLHttpRequest();
-    var url = "photo/json";
-
-    xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            var myArr = JSON.parse(xmlhttp.responseText);
-
-            return myArr
-        }
-    }
-    xmlhttp.open("GET", url, true);
-    xmlhttp.send();
-}
-
-
 //Angular App Module and Controller
 var MapModule = angular.module('mapsApp', [])
-.controller('EventBoxCtrl', function ($scope) {
-	$scope.events = [
-    {
-        event : 'Toronto',
-        desc : 'This is the best event in the world!',
-        lat : 43.7000,
-        long : -79.4000
-    },
-    {
-        event : 'New York',
-        desc : 'This event is aiiiiite!',
-        lat : 40.6700,
-        long : -73.9400
-    },
-    {
-        event : 'Chicago',
-        desc : 'This is the second best event in the world!',
-        lat : 41.8819,
-        long : -87.6278
-    },
-    {
-        event : 'Los Angeles',
-        desc : 'This event is live!',
-        lat : 34.0500,
-        long : -118.2500
-    },
-    {
-        event : 'Las Vegas',
-        desc : 'Sin event...\'nuff said!',
-        lat : 36.0800,
-        long : -115.1522
-    }
-];
+.controller('EventBoxCtrl', function ($scope,$http){ $http.get("events/json")
+    .success(function(response) {
+    $scope.events = response.data
+//	$scope.events = [
+//    {
+//        event : 'Toronto',
+//        desc : 'This is the best event in the world!',
+//        lat : 43.7000,
+//        long : -79.4000
+//    },
+//    {
+//        event : 'New York',
+//        desc : 'This event is aiiiiite!',
+//        lat : 40.6700,
+//        long : -73.9400
+//    },
+//    {
+//        event : 'Chicago',
+//        desc : 'This is the second best event in the world!',
+//        lat : 41.8819,
+//        long : -87.6278
+//    },
+//    {
+//        event : 'Los Angeles',
+//        desc : 'This event is live!',
+//        lat : 34.0500,
+//        long : -118.2500
+//    },
+//    {
+//        event : 'Las Vegas',
+//        desc : 'Sin event...\'nuff said!',
+//        lat : 36.0800,
+//        long : -115.1522
+//    }
+//];
 
 var map = {};
 var redDot = new google.maps.MarkerImage(
@@ -87,11 +71,11 @@ var createMarker = function (info){
     // var image='img/red_marker.png'
     var marker = new google.maps.Marker({
         map: $scope.map,
-        position: new google.maps.LatLng(info.lat, info.long),
-        title: info.event,
+        position: new google.maps.LatLng(info.latitude, info.longitude),
+        title: info.name,
 		icon: redDot
     });
-    marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
+    marker.content = '<div class="infoWindowContent">' + info.description + '</div>';
     
     google.maps.event.addListener(marker, 'click', function(){
         infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
@@ -100,8 +84,7 @@ var createMarker = function (info){
     $scope.markers.push(marker);
     return marker;
     
-}  
-
+}
 for (i = 0; i < $scope.events.length; i++){
     map[i] = createMarker($scope.events[i]);
 	$scope.events[i].map_id = i;
@@ -120,4 +103,4 @@ $scope.openInfoWindow = function(e, selectedMarker){
         map[map_id].setIcon(redDot);
     }
 
-});
+})});

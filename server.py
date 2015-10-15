@@ -28,6 +28,13 @@ def comments_handler():
             file.write(json.dumps(comments, indent=4, separators=(',', ': ')))
 
     return Response(json.dumps(comments), mimetype='application/json', headers={'Cache-Control': 'no-cache'})
-
+@app.route('/events/json',methods=['GET'])
+def events_handler():
+    try:
+        with open('photo/json','r') as file:
+            data=json.loads(file.read())
+            return json.dumps(data,indent=4, separators=(',', ': ')),200
+    except Exception , e:
+        print e
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=int(os.environ.get("PORT",80)))
