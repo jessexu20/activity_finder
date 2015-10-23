@@ -3,39 +3,6 @@ var MapModule = angular.module('mapsApp', [])
 .controller('EventBoxCtrl', function ($scope,$http){ $http.get("events/json")
     .success(function(response) {
     $scope.events = response.data
-//	$scope.events = [
-//    {
-//        event : 'Toronto',
-//        desc : 'This is the best event in the world!',
-//        lat : 43.7000,
-//        long : -79.4000
-//    },
-//    {
-//        event : 'New York',
-//        desc : 'This event is aiiiiite!',
-//        lat : 40.6700,
-//        long : -73.9400
-//    },
-//    {
-//        event : 'Chicago',
-//        desc : 'This is the second best event in the world!',
-//        lat : 41.8819,
-//        long : -87.6278
-//    },
-//    {
-//        event : 'Los Angeles',
-//        desc : 'This event is live!',
-//        lat : 34.0500,
-//        long : -118.2500
-//    },
-//    {
-//        event : 'Las Vegas',
-//        desc : 'Sin event...\'nuff said!',
-//        lat : 36.0800,
-//        long : -115.1522
-//    }
-//];
-
 var map = {};
 var redDot = new google.maps.MarkerImage(
     "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|C92A2A",
